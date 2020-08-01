@@ -6,6 +6,8 @@ import cn.hebeuit.entity.Order;
 import cn.hebeuit.entity.User;
 import cn.hebeuit.server.OrderServer;
 import cn.hebeuit.server.UserServer;
+import org.apache.zookeeper.Watcher;
+import org.apache.zookeeper.ZooKeeper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +38,6 @@ public class ViewController {
     public String addUser(String username,Model model){
         userServer.addUser(username);
         model.addAttribute("user",username);
-
         return "forward:/WEB-INF/jsp/index.jsp";
     }
     @RequestMapping("/show")
@@ -45,6 +47,7 @@ public class ViewController {
     }
     @RequestMapping("/")
     public ModelAndView index(){
+
         ModelAndView model=new ModelAndView();
         model.setViewName("index");
         return model;

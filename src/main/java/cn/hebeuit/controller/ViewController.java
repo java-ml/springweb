@@ -35,6 +35,7 @@ public class ViewController {
     public String addUser(String username,Model model){
         userServer.addUser(username);
         model.addAttribute("user",username);
+
         return "forward:/WEB-INF/jsp/index.jsp";
     }
     @RequestMapping("/show")
